@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Change </title>
+    <style>
+        /* Global styles come from external css https://codepen.io/GreenSock/pen/JGaKdQ*/
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: stretch;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            margin: 1rem;
+        }
+
+        h1 span {
+            color: var(--color-shockingly-green)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>GreenSock's TextPlugin<span></span></h1>
+        <h2>Set or animate text in sequence. Reversible too!</h2>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"
+        integrity="sha512-xAxjKW1J/R4TFytv43xvQ7jFTrJlBzsDOH/Aw0fFc2nvarQkE3d08lTicjzUsZJYDoHYDCpwsUUqOJXh34A1sw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // let data = {
+        //     1: " This is Web developer",
+        //     2: " He is Java Developr",
+        //     3: " She is React Js Developer"
+        // }
+        // gsap.defaults({ ease: "none" });
+        // const tl = gsap.timeline({ repeat: data.length, repeatDelay: 1, yoyo: true });
+        // // for (let i = 0; i < 3; i++) {
+        // //     tl.to("h1 span", { duration: 4, text: data[i+1]   })
+        // // }
+        // // Set up forward and reverse animations
+        // tl.to("h1 span", { duration: 4, text: data[1] })
+        //     .to("h1 span", { duration: 4, text: data[2] })
+        //     .to("h1 span", { duration: 4, text: data[3] });
+
+        // // Set text back manually on each reverse to previous values
+        // tl.call(() => gsap.to("h1 span", { duration: 0.5, text: data[2] }), null, "-=4")
+        //     .call(() => gsap.to("h1 span", { duration: 0.5, text: data[1] }), null, "-=8")
+        //     .call(() => gsap.to("h1 span", { duration: 0.5, text: "" }), null, "-=12");
+
+        // Register the TextPlugin
+        gsap.registerPlugin(TextPlugin);
+
+        // Data object containing sentences to display
+        let data = [
+            "This is Web Developer",
+            "He is Java Developer",
+            "She is React Js Developer"
+        ];
+
+        // Timeline with repeated animations
+        const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+
+        // Loop through each sentence in the data array
+        data.forEach((sentence, index) => {
+            tl.to("h1 span", { duration: 3, text: sentence })   // Animate to reveal sentence
+                .to("h1 span", { duration: 3, text: "", reverse: true });       // Animate to remove sentence
+        });
+
+    </script>
+</body>
+
+</html>
